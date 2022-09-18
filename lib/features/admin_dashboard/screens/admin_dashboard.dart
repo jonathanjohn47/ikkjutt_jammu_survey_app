@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ikkjutt_jammu_survey_app/core/app_colors.dart';
 import 'package:ikkjutt_jammu_survey_app/features/add_new_member/screens/add_new_member_screen.dart';
+import 'package:ikkjutt_jammu_survey_app/features/new_survey/screens/new_survey_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/widgets/standard_app_bar.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -113,7 +114,9 @@ class AdminDashboard extends StatelessWidget {
       ),
     ),
     GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(() => NewSurveyScreen());
+      },
       child: Card(
         child: Center(
           child: SizedBox(

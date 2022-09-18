@@ -39,6 +39,8 @@ dependencies:
   flutter_launcher_icons: ^0.10.0
   get: ^4.6.5
   material_design_icons_flutter: ^5.0.6996
+  flutter_geofence: ^0.4.4
+  flutter_datetime_picker: ^1.5.1
 
 dev_dependencies:
   flutter_test:
