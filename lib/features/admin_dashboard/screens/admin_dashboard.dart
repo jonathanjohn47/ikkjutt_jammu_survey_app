@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ikkjutt_jammu_survey_app/core/app_colors.dart';
 import 'package:ikkjutt_jammu_survey_app/features/add_new_member/screens/add_new_member_screen.dart';
+import 'package:ikkjutt_jammu_survey_app/features/all_members/screens/all_members_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/all_surveys_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/features/new_survey/screens/new_survey_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/widgets/standard_app_bar.dart';
@@ -74,7 +75,7 @@ class AdminDashboard extends StatelessWidget {
                       leading: Icon(MdiIcons.accountMultiple),
                       title: Text('All Members'),
                       onTap: () {
-                        Navigator.pop(context);
+                        Get.to(() => AllMembersScreen());
                       },
                     ),
                   ],
