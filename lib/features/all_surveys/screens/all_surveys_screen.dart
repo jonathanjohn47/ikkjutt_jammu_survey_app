@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/report_screen.dart';
+import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/take_survey_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/widgets/custom_divider.dart';
 
 import '../../../core/app_colors.dart';
@@ -26,32 +28,45 @@ class AllSurveysScreen extends StatelessWidget {
               )),
           body: ListView.builder(
             itemBuilder: (context, index) {
-              return Card(
-                elevation: allSurveysGetController.allSurveys[index].isCompleted
-                    ? 0
-                    : 2,
-                color: allSurveysGetController.allSurveys[index].isCompleted
-                    ? Colors.transparent
-                    : Colors.white,
-                child: Column(
-                  children: [
-                    ListTile(
-                      title:
-                          Text(allSurveysGetController.allSurveys[index].title),
-                      subtitle: Text(allSurveysGetController
-                          .allSurveys[index].description),
-                    ),
-                    CustomDivider(
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-                    ListTile(
-                      title: Text('Number of Questions:'),
-                      trailing: Text(allSurveysGetController
-                          .allSurveys[index].questions.length
-                          .toString()),
-                    ),
-                  ],
+              return GestureDetector(
+                onTap: () {
+                  if (allSurveysGetController.allSurveys[index].isCompleted) {
+                    Get.to(() => ReportScreen(
+                          surveyModel:
+                              allSurveysGetController.allSurveys[index],
+                        ));
+                  } else {
+                    Get.to(() => TakeSurveyScreen());
+                  }
+                },
+                child: Card(
+                  elevation:
+                      allSurveysGetController.allSurveys[index].isCompleted
+                          ? 0
+                          : 2,
+                  color: allSurveysGetController.allSurveys[index].isCompleted
+                      ? Colors.transparent
+                      : Colors.white,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text(
+                            allSurveysGetController.allSurveys[index].title),
+                        subtitle: Text(allSurveysGetController
+                            .allSurveys[index].description),
+                      ),
+                      CustomDivider(
+                        thickness: 1,
+                        color: Colors.grey,
+                      ),
+                      ListTile(
+                        title: Text('Number of Questions:'),
+                        trailing: Text(allSurveysGetController
+                            .allSurveys[index].questions.length
+                            .toString()),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

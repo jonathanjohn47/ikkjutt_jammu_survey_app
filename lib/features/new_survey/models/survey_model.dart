@@ -55,12 +55,10 @@ class SurveyModel {
       scheduledAt: DateTime.now(),
       area: 'Srinagar',
       isCompleted: random.nextBool(),
-      questions: [
-        QuestionModel(
-            trueFalseQuestionModel: TrueFalseQuestionModel(
-          questionText: 'How Are You?',
-        )),
-      ],
+      questions: List.generate(
+        10,
+        (index) => QuestionModel.empty(),
+      ),
     );
   }
 }

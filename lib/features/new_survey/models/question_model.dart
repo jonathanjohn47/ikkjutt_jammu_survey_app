@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class FreeTextQuestionModel {
   String questionText;
   String? answerText;
@@ -205,6 +207,88 @@ class QuestionModel {
       return numberTypeQuestion!.questionText;
     } else {
       return "";
+    }
+  }
+
+  String get answerText {
+    if (freeTextQuestionModel != null) {
+      return freeTextQuestionModel!.answerText!;
+    } else if (trueFalseQuestionModel != null) {
+      return trueFalseQuestionModel!.answer.toString();
+    } else if (selectOneOptionQuestion != null) {
+      return selectOneOptionQuestion!.answer.toString();
+    } else if (selectMultipleOptionsQuestion != null) {
+      return selectMultipleOptionsQuestion!.answers!.join(", ");
+    } else if (numberTypeQuestion != null) {
+      return numberTypeQuestion!.answer.toString();
+    } else {
+      return "";
+    }
+  }
+
+  factory QuestionModel.emptyFreeTextQuestion() {
+    return QuestionModel(
+      freeTextQuestionModel: FreeTextQuestionModel(
+        questionText: "How are you?",
+        answerText: "I am good.",
+      ),
+    );
+  }
+
+  factory QuestionModel.emptyTrueFalseQuestion() {
+    return QuestionModel(
+      trueFalseQuestionModel: TrueFalseQuestionModel(
+        questionText: "Are you good?",
+        answer: true,
+      ),
+    );
+  }
+
+  factory QuestionModel.emptySelectOneOptionQuestion() {
+    return QuestionModel(
+      selectOneOptionQuestion: SelectOneOptionQuestion(
+        questionText: "What is your favorite color?",
+        answer: "Red",
+        options: ["Red", "Green", "Blue"],
+      ),
+    );
+  }
+
+  factory QuestionModel.emptySelectMultipleOptionsQuestion() {
+    return QuestionModel(
+      selectMultipleOptionsQuestion: SelectMultipleOptionsQuestion(
+        questionText: "What are your favorite colors?",
+        answers: ["Red", "Green", "Blue"],
+        options: ["Red", "Green", "Blue"],
+      ),
+    );
+  }
+
+  factory QuestionModel.emptyNumberTypeQuestion() {
+    return QuestionModel(
+      numberTypeQuestion: NumberTypeQuestion(
+        questionText: "How old are you?",
+        answer: 20,
+      ),
+    );
+  }
+
+  factory QuestionModel.empty() {
+    Random random = Random();
+    int randomNumber = random.nextInt(5);
+    switch (randomNumber) {
+      case 0:
+        return QuestionModel.emptyFreeTextQuestion();
+      case 1:
+        return QuestionModel.emptyTrueFalseQuestion();
+      case 2:
+        return QuestionModel.emptySelectOneOptionQuestion();
+      case 3:
+        return QuestionModel.emptySelectMultipleOptionsQuestion();
+      case 4:
+        return QuestionModel.emptyNumberTypeQuestion();
+      default:
+        return QuestionModel.emptyFreeTextQuestion();
     }
   }
 }
