@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ikkjutt_jammu_survey_app/features/new_survey/models/question_model.dart';
 
 class SurveyModel {
@@ -42,5 +44,23 @@ class SurveyModel {
       'is_completed': isCompleted,
       'questions': questions.map((x) => x.toJson()).toList(),
     };
+  }
+
+  factory SurveyModel.empty() {
+    Random random = new Random();
+    return SurveyModel(
+      id: '',
+      title: 'Demo Survey',
+      description: 'Demo Survey Description',
+      scheduledAt: DateTime.now(),
+      area: 'Srinagar',
+      isCompleted: random.nextBool(),
+      questions: [
+        QuestionModel(
+            trueFalseQuestionModel: TrueFalseQuestionModel(
+          questionText: 'How Are You?',
+        )),
+      ],
+    );
   }
 }

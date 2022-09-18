@@ -15,8 +15,6 @@ class FreeTextQuestionModel {
     return FreeTextQuestionModel(
       questionText: json['question_text'],
       answerText: json['answer_text'],
-      latitude: double.parse(json['latitude'].toString()),
-      longitude: double.parse(json['longitude'].toString()),
     );
   }
 
@@ -24,8 +22,6 @@ class FreeTextQuestionModel {
     return {
       'question_text': questionText,
       'answer_text': answerText,
-      'latitude': latitude,
-      'longitude': longitude,
     };
   }
 }
@@ -33,22 +29,16 @@ class FreeTextQuestionModel {
 class TrueFalseQuestionModel {
   String questionText;
   bool? answer;
-  double latitude;
-  double longitude;
 
   TrueFalseQuestionModel({
     required this.questionText,
     this.answer,
-    required this.latitude,
-    required this.longitude,
   });
 
   factory TrueFalseQuestionModel.fromJson(Map<String, dynamic> json) {
     return TrueFalseQuestionModel(
       questionText: json['question_text'],
       answer: json['answer'],
-      latitude: double.parse(json['latitude'].toString()),
-      longitude: double.parse(json['longitude'].toString()),
     );
   }
 
@@ -56,8 +46,6 @@ class TrueFalseQuestionModel {
     return {
       'question_text': questionText,
       'answer': answer,
-      'latitude': latitude,
-      'longitude': longitude,
     };
   }
 }
@@ -65,15 +53,12 @@ class TrueFalseQuestionModel {
 class SelectOneOptionQuestion {
   String questionText;
   String? answer;
-  double latitude;
-  double longitude;
+
   List<String> options;
 
   SelectOneOptionQuestion({
     required this.questionText,
     this.answer,
-    required this.latitude,
-    required this.longitude,
     required this.options,
   });
 
@@ -81,8 +66,6 @@ class SelectOneOptionQuestion {
     return SelectOneOptionQuestion(
       questionText: json['question_text'],
       answer: json['answer'],
-      latitude: double.parse(json['latitude'].toString()),
-      longitude: double.parse(json['longitude'].toString()),
       options: List<String>.from(json['options']),
     );
   }
@@ -91,8 +74,6 @@ class SelectOneOptionQuestion {
     return {
       'question_text': questionText,
       'answer': answer,
-      'latitude': latitude,
-      'longitude': longitude,
       'options': options,
     };
   }
@@ -101,15 +82,12 @@ class SelectOneOptionQuestion {
 class SelectMultipleOptionsQuestion {
   String questionText;
   List<String>? answers;
-  double latitude;
-  double longitude;
+
   List<String> options;
 
   SelectMultipleOptionsQuestion({
     required this.questionText,
     this.answers,
-    required this.latitude,
-    required this.longitude,
     required this.options,
   });
 
@@ -117,8 +95,6 @@ class SelectMultipleOptionsQuestion {
     return SelectMultipleOptionsQuestion(
       questionText: json['question_text'],
       answers: List<String>.from(json['answers']),
-      latitude: double.parse(json['latitude'].toString()),
-      longitude: double.parse(json['longitude'].toString()),
       options: List<String>.from(json['options']),
     );
   }
@@ -127,8 +103,6 @@ class SelectMultipleOptionsQuestion {
     return {
       'question_text': questionText,
       'answers': answers,
-      'latitude': latitude,
-      'longitude': longitude,
       'options': options,
     };
   }
@@ -137,22 +111,16 @@ class SelectMultipleOptionsQuestion {
 class NumberTypeQuestion {
   String questionText;
   double? answer;
-  double latitude;
-  double longitude;
 
   NumberTypeQuestion({
     required this.questionText,
     this.answer,
-    required this.latitude,
-    required this.longitude,
   });
 
   factory NumberTypeQuestion.fromJson(Map<String, dynamic> json) {
     return NumberTypeQuestion(
       questionText: json['question_text'],
       answer: double.parse(json['answer'].toString()),
-      latitude: double.parse(json['latitude'].toString()),
-      longitude: double.parse(json['longitude'].toString()),
     );
   }
 
@@ -160,8 +128,6 @@ class NumberTypeQuestion {
     return {
       'question_text': questionText,
       'answer': answer,
-      'latitude': latitude,
-      'longitude': longitude,
     };
   }
 }

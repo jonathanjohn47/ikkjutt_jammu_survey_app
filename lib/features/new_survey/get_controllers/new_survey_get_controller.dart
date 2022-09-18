@@ -149,12 +149,7 @@ class NewSurveyGetController extends GetxController {
                                   trueFalseQuestionModel:
                                       TrueFalseQuestionModel(
                                     questionText: questionTextController.text,
-                                    latitude: location == null
-                                        ? 0
-                                        : location.latitude,
-                                    longitude: location == null
-                                        ? 0
-                                        : location.longitude,
+                                    
                                   ),
                                 );
                                 questions.add(questionModel);
@@ -281,12 +276,7 @@ class NewSurveyGetController extends GetxController {
                                   selectOneOptionQuestion:
                                       SelectOneOptionQuestion(
                                     questionText: questionTextController.text,
-                                    latitude: location == null
-                                        ? 0
-                                        : location.latitude,
-                                    longitude: location == null
-                                        ? 0
-                                        : location.longitude,
+                                    
                                     options: options,
                                   ),
                                 );
@@ -414,12 +404,7 @@ class NewSurveyGetController extends GetxController {
                                   selectMultipleOptionsQuestion:
                                       SelectMultipleOptionsQuestion(
                                     questionText: questionTextController.text,
-                                    latitude: location == null
-                                        ? 0
-                                        : location.latitude,
-                                    longitude: location == null
-                                        ? 0
-                                        : location.longitude,
+                                    
                                     options: options,
                                   ),
                                 );
@@ -479,12 +464,7 @@ class NewSurveyGetController extends GetxController {
                                 QuestionModel questionModel = QuestionModel(
                                   numberTypeQuestion: NumberTypeQuestion(
                                     questionText: questionTextController.text,
-                                    latitude: location == null
-                                        ? 0
-                                        : location.latitude,
-                                    longitude: location == null
-                                        ? 0
-                                        : location.longitude,
+                                    
                                   ),
                                 );
                                 questions.add(questionModel);
