@@ -35,7 +35,13 @@ class ReportScreen extends StatelessWidget {
           preferredSize: Size.fromHeight(kToolbarHeight),
           child: StandardAppBar(
             title: "Report",
-            actions: [IconButton(onPressed: () {}, icon: Icon(Icons.print))],
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    reportScreenGetController.saveAsPdf();
+                  },
+                  icon: Icon(Icons.print))
+            ],
           ),
         ),
         body: SingleChildScrollView(
@@ -52,13 +58,13 @@ class ReportScreen extends StatelessWidget {
                     ...reportScreenGetController
                         .allReports[0].surveyModel.questions
                         .map((e) => Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: TextWithFormat(
+                              padding: const EdgeInsets.all(4.0),
+                              child: TextWithFormat(
                                 e.questionText,
                                 bold: true,
                                 maxLines: 5,
                               ),
-                        )),
+                            )),
                   ]),
                   ...reportScreenGetController.allReports
                       .map((e) => TableRow(children: [
@@ -71,7 +77,10 @@ class ReportScreen extends StatelessWidget {
                             ...e.surveyModel.questions
                                 .map((e) => Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: TextWithFormat(e.answerText, maxLines: 10,),
+                                      child: TextWithFormat(
+                                        e.answerText,
+                                        maxLines: 10,
+                                      ),
                                     ))
                                 .toList()
                           ]))

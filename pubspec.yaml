@@ -41,6 +41,8 @@ dependencies:
   material_design_icons_flutter: ^5.0.6996
   flutter_geofence: ^0.4.4
   flutter_datetime_picker: ^1.5.1
+  pdf: ^3.8.3
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +88,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Open_Sans
+      fonts:
+        - asset: assets/fonts/Open_Sans/OpenSans-Italic-VariableFont_wdth,wght.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf
+        - asset: assets/fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
