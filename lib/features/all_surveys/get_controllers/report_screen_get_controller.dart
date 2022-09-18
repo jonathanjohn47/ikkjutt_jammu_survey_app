@@ -44,10 +44,12 @@ class ReportScreenGetController extends GetxController {
         },
       ),
     );
-    final output = await getExternalStorageDirectories();
-    final path = "${output}/IkkJuttSurvey.pdf";
-    final file = File("${path}");
-    await file.writeAsBytes(await pdf.save());
+    final output = await getApplicationDocumentsDirectory();
+    final path = "${output.path}/IkkJuttSurvey.pdf";
+    File(path).create(recursive: true).then((file) async {
+      await file.writeAsBytes(await pdf.save());
+      print("File Saved");
+    });
   }
 
   @override

@@ -4,6 +4,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!--write external storage permission-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--read internal storage permission-->
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <!--write internal storage permission-->
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
    <application
         android:label="ikkjutt_jammu_survey_app"
         android:name="${applicationName}"
