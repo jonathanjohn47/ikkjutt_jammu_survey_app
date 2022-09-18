@@ -22,6 +22,14 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
+    prefer_const_constructors: false
+    prefer_final_fields: false
+    prefer_const_constructors_in_immutables: false
+    prefer_const_constructors_in_immutables_instances: false
+    avoid_field_initializers_in_const_classes: true
+    avoid_final_parameters: true
+    prefer_const_literals_to_create_immutables: false
+    avoid_function_literals_in_foreach_calls: true
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

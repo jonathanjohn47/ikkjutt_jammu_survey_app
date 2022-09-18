@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ikkjutt_jammu_survey_app/widgets/text_with_format.dart';
 
+import '../core/app_colors.dart';
+
 class StandardButton extends StatelessWidget {
   final String text;
   final Function onPressed;
@@ -31,7 +33,7 @@ class StandardButton extends StatelessWidget {
               onPressed();
             },
             heroTag: null,
-            elevation: elevation ?? 2,
+            elevation: elevation ?? 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius ?? 8.0),
             ),
@@ -40,14 +42,14 @@ class StandardButton extends StatelessWidget {
               color: textColor,
               fontSize: textSize,
             ),
-            backgroundColor: color ?? Theme.of(context).secondaryHeaderColor,
+            backgroundColor: color ?? AppColors.secondaryHeaderColor.shade600,
           )
         : FloatingActionButton.extended(
             onPressed: () {
               onPressed();
             },
             heroTag: null,
-            elevation: elevation ?? 2,
+            elevation: elevation ?? 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius ?? 8.0),
             ),
@@ -60,7 +62,7 @@ class StandardButton extends StatelessWidget {
               icon,
               color: textColor,
             ),
-            backgroundColor: color ?? Theme.of(context).secondaryHeaderColor,
+            backgroundColor: color ?? AppColors.secondaryHeaderColor.shade600,
           );
   }
 }
