@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ikkjutt_jammu_survey_app/core/app_colors.dart';
 import 'package:ikkjutt_jammu_survey_app/features/authentication/screens/login_page.dart';
@@ -27,6 +28,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: AppColors.primaryColor,
         secondaryHeaderColor: AppColors.secondaryHeaderColor,
+        brightness: Brightness.light,
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+        ),
       ),
       home: LoginPage(),
     );

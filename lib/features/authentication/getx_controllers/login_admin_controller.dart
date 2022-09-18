@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ikkjutt_jammu_survey_app/features/admin_dashboard/screens/admin_dashboard.dart';
 
 class LoginAdminController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -7,7 +8,7 @@ class LoginAdminController extends GetxController {
 
   RxBool showPassword = false.obs;
 
-  void login(){
-
+  void login() {
+    Get.off(() => AdminDashboard());
   }
 }
