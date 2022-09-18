@@ -10,9 +10,16 @@ class ReportScreenGetController extends GetxController {
   RxList<ReportModel> allReports = <ReportModel>[].obs;
 
   void getAllReports() {
+    ReportModel reportModel = ReportModel.empty();
     for (int i = 0; i < 10; i++) {
-      allReports.add(ReportModel.empty());
+      allReports.add(reportModel);
     }
+    allReports.forEach((element) {
+      element.surveyModel.questions.forEach((question) {
+        print("Question: " + question.questionText);
+        print("Answer: " + question.answerText);
+      });
+    });
   }
 
   @override

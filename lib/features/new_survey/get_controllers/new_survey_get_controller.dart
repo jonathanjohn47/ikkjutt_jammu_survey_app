@@ -95,6 +95,7 @@ class NewSurveyGetController extends GetxController {
                                   longitude:
                                       location == null ? 0 : location.longitude,
                                 ),
+                                questionNumber: questions.length + 1,
                               );
                               questions.add(questionModel);
                               Get.back();
@@ -149,8 +150,8 @@ class NewSurveyGetController extends GetxController {
                                   trueFalseQuestionModel:
                                       TrueFalseQuestionModel(
                                     questionText: questionTextController.text,
-                                    
                                   ),
+                                  questionNumber: questions.length + 1,
                                 );
                                 questions.add(questionModel);
                                 Get.back();
@@ -276,9 +277,9 @@ class NewSurveyGetController extends GetxController {
                                   selectOneOptionQuestion:
                                       SelectOneOptionQuestion(
                                     questionText: questionTextController.text,
-                                    
                                     options: options,
                                   ),
+                                  questionNumber: questions.length + 1,
                                 );
                                 questions.add(questionModel);
                                 Get.back();
@@ -401,10 +402,10 @@ class NewSurveyGetController extends GetxController {
                             onPressed: () {
                               Geofence.getCurrentLocation().then((location) {
                                 QuestionModel questionModel = QuestionModel(
+                                  questionNumber: questions.length + 1,
                                   selectMultipleOptionsQuestion:
                                       SelectMultipleOptionsQuestion(
                                     questionText: questionTextController.text,
-                                    
                                     options: options,
                                   ),
                                 );
@@ -462,9 +463,9 @@ class NewSurveyGetController extends GetxController {
                             onPressed: () {
                               Geofence.getCurrentLocation().then((location) {
                                 QuestionModel questionModel = QuestionModel(
+                                  questionNumber: questions.length + 1,
                                   numberTypeQuestion: NumberTypeQuestion(
                                     questionText: questionTextController.text,
-                                    
                                   ),
                                 );
                                 questions.add(questionModel);

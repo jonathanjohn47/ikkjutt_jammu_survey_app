@@ -39,51 +39,44 @@ class ReportScreen extends StatelessWidget {
           ),
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Table(
-              /*columnWidths: {
-                0: FractionColumnWidth(1 / 3),
-                ...reportScreenGetController.allReports[0].surveyModel.questions
-                    .asMap()
-                    .map((key, value) => MapEntry(
-                        key,
-                        FractionColumnWidth(Get.width /
-                            reportScreenGetController
-                                .allReports[0].surveyModel.questions.length))),
-              },*/
-              //first column small, rest of the columns equal width
-              columnWidths: {
-                ...reportScreenGetController.allReports[0].surveyModel.questions
-                    .asMap()
-                    .map((key, value) => MapEntry(
-                        key,
-                        FractionColumnWidth(1 /
-                            (reportScreenGetController
-                                .allReports[0].surveyModel.questions.length)))),
-              },
-              border: TableBorder.all(),
-              children: [
-                TableRow(children: [
-                  ...surveyModel.questions.map((e) => TextWithFormat(
-                        e.questionText,
-                        bold: true,
-                        maxLines: 5,
-                      )),
-                ]),
-                ...reportScreenGetController.allReports
-                    .map((e) => TableRow(children: [
-                          /*TextWithFormat(
-                            (reportScreenGetController.allReports.indexOf(e) + 1)
-                                .toString(),
-                            color: Colors.grey,
-                            italic: true,
-                          ),*/
-                          ...e.surveyModel.questions
-                              .map((e) => Text(e.answerText))
-                              .toList()
-                        ]))
-              ],
+          child: SizedBox(
+            width: reportScreenGetController
+                    .allReports[0].surveyModel.questions.length *
+                200.0,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Table(
+                border: TableBorder.all(),
+                children: [
+                  TableRow(children: [
+                    ...reportScreenGetController
+                        .allReports[0].surveyModel.questions
+                        .map((e) => Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: TextWithFormat(
+                                e.questionText,
+                                bold: true,
+                                maxLines: 5,
+                              ),
+                        )),
+                  ]),
+                  ...reportScreenGetController.allReports
+                      .map((e) => TableRow(children: [
+                            /*TextWithFormat(
+                              (reportScreenGetController.allReports.indexOf(e) + 1)
+                                  .toString(),
+                              color: Colors.grey,
+                              italic: true,
+                            ),*/
+                            ...e.surveyModel.questions
+                                .map((e) => Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: TextWithFormat(e.answerText, maxLines: 10,),
+                                    ))
+                                .toList()
+                          ]))
+                ],
+              ),
             ),
           ),
         ),
