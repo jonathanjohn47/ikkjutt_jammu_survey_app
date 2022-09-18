@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart' show ByteData, Uint8List, rootBundle;
+import 'package:flutter_storage_path/flutter_storage_path.dart';
 import 'package:get/get.dart';
 import 'package:ikkjutt_jammu_survey_app/features/all_surveys/models/report_model.dart';
 import 'package:ikkjutt_jammu_survey_app/features/new_survey/models/survey_model.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -44,8 +44,8 @@ class ReportScreenGetController extends GetxController {
         },
       ),
     );
-    final output = await getTemporaryDirectory();
-    final path = "${output!.path}/IkkJuttSurvey.pdf";
+    final output = await StoragePath.filePath;
+    final path = "$output/IkkJuttSurvey.pdf";
     File(path).create(recursive: true).then((file) async {
       await file.writeAsBytes(await pdf.save());
       print("Output path: $path");
