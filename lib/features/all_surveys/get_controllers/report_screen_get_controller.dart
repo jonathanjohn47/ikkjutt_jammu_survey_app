@@ -7,6 +7,7 @@ import 'package:ikkjutt_jammu_survey_app/features/new_survey/models/survey_model
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 class ReportScreenGetController extends GetxController {
   final SurveyModel surveyModel;
@@ -23,11 +24,7 @@ class ReportScreenGetController extends GetxController {
   }
 
   Future<void> saveAsPdf() async {
-    final ByteData fontData =
-        //asset file "assets/fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf"
-        await rootBundle.load(
-            "assets/fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf");
-    final ttf = pw.Font.ttf(fontData.buffer.asByteData());
+    final font = await PdfGoogleFonts.nunitoExtraLight();
 
     ByteData bytes = await rootBundle.load('assets/images/logo.jpeg');
     final pdf = pw.Document();
@@ -41,15 +38,15 @@ class ReportScreenGetController extends GetxController {
             ),
             pw.Text("Ikkjutt Jammu Survey No. ${surveyModel.id}",
                 style: pw.TextStyle(
-                  font: ttf,
+                  font: font,
                 )),
           ]); // Center
         },
       ),
     );
-    final output = await getTemporaryDirectory();
-    final file = File("${output.path}/IkkJuttSurvey.pdf");
-
+    final output = await getExternalStorageDirectories();
+    final path = "${output}/IkkJuttSurvey.pdf";
+    final file = File("${path}");
     await file.writeAsBytes(await pdf.save());
   }
 

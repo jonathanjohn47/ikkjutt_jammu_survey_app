@@ -1,9 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.ikkjutt_jammu_survey_app">
+    <!--read external storage permission-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--write external storage permission-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
    <application
         android:label="ikkjutt_jammu_survey_app"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/launcher_icon"
+       android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"
