@@ -1,7 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/services.dart' show ByteData, Uint8List, rootBundle;
-import 'package:flutter_storage_path/flutter_storage_path.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ikkjutt_jammu_survey_app/features/all_surveys/models/report_model.dart';
 import 'package:ikkjutt_jammu_survey_app/features/new_survey/models/survey_model.dart';
@@ -18,38 +15,51 @@ class ReportScreenGetController extends GetxController {
 
   void getAllReports() {
     ReportModel reportModel = ReportModel.empty();
-    for (int i = 0; i < 10; i++) {
-      allReports.add(reportModel);
+    for (int i = 0; i < 5; i++) {
+      ReportModel newReportModel = ReportModel(
+          DateTime.now().millisecondsSinceEpoch.toString(),
+          reportModel.surveyModel,
+          reportModel.title);
+      allReports.add(newReportModel);
     }
   }
 
   Future<void> saveAsPdf() async {
-    final font = await PdfGoogleFonts.nunitoExtraLight();
-
-    ByteData bytes = await rootBundle.load('assets/images/logo.jpeg');
     final pdf = pw.Document();
-    pdf.addPage(
-      pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Row(children: [
-            pw.Image(
-              pw.MemoryImage(bytes.buffer.asUint8List()),
-            ),
-            pw.Text("Ikkjutt Jammu Survey No. ${surveyModel.id}",
-                style: pw.TextStyle(
-                  font: font,
-                )),
-          ]); // Center
-        },
-      ),
+    //read asset image as bytes
+    final image = pw.MemoryImage(
+      (await rootBundle.load('assets/images/logo.jpeg')).buffer.asUint8List(),
     );
-    final output = await StoragePath.filePath;
-    final path = "$output/IkkJuttSurvey.pdf";
-    File(path).create(recursive: true).then((file) async {
-      await file.writeAsBytes(await pdf.save());
-      print("Output path: $path");
-      print("File Saved");
+    PdfGoogleFonts.nunitoRegular().then((font) {
+      pdf.addPage(pw.Page(
+          pageFormat: PdfPageFormat.a4,
+          build: (pw.Context context) {
+            return pw.Column(children: [
+              pw.Row(children: [
+                pw.Image(
+                  image,
+                ),
+                pw.Text(
+                  'SURVEY REPORT',
+                  style: pw.TextStyle(
+                    fontSize: 20,
+                    fontWeight: pw.FontWeight.bold,
+                    font: font,
+                  ),
+                ),
+              ]),
+            ]);
+          }));
+      pdf.save().then((value) {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
+        Printing.sharePdf(
+            bytes: value, filename: 'IkkJutt${surveyModel.title}.pdf');
+      });
     });
   }
 

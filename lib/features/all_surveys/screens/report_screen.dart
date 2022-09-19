@@ -52,9 +52,17 @@ class ReportScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Table(
+                columnWidths: {
+                  0: FlexColumnWidth(1),
+                  ...Map.fromIterable(reportScreenGetController.allReports,
+                      key: (e) =>
+                          reportScreenGetController.allReports.indexOf(e) + 1,
+                      value: (e) => FlexColumnWidth(5))
+                },
                 border: TableBorder.all(),
                 children: [
                   TableRow(children: [
+                    Container(),
                     ...reportScreenGetController
                         .allReports[0].surveyModel.questions
                         .map((e) => Padding(
@@ -68,12 +76,13 @@ class ReportScreen extends StatelessWidget {
                   ]),
                   ...reportScreenGetController.allReports
                       .map((e) => TableRow(children: [
-                            /*TextWithFormat(
-                              (reportScreenGetController.allReports.indexOf(e) + 1)
+                            TextWithFormat(
+                              (reportScreenGetController.allReports.indexOf(e) +
+                                      1)
                                   .toString(),
                               color: Colors.grey,
                               italic: true,
-                            ),*/
+                            ),
                             ...e.surveyModel.questions
                                 .map((e) => Padding(
                                       padding: const EdgeInsets.all(4.0),

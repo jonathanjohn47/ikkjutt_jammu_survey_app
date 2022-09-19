@@ -46,6 +46,13 @@ dependencies:
   google_fonts: ^3.0.1
   printing: ^5.9.3
   flutter_storage_path: ^1.0.3
+  syncfusion_flutter_pdf: ^20.2.49
+
+  open_file: ^3.2.1
+  shared_preferences: ^2.0.11
+
+
+
 
 dev_dependencies:
   flutter_test:
