@@ -16,7 +16,7 @@ class ReportScreenGetController extends GetxController {
 
   void getAllReports() {
     ReportModel reportModel = ReportModel.empty();
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
       ReportModel newReportModel = ReportModel(
           DateTime.now().millisecondsSinceEpoch.toString(),
           reportModel.surveyModel,

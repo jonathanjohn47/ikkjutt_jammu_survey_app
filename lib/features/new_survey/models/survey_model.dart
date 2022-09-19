@@ -56,7 +56,7 @@ class SurveyModel {
       area: 'Srinagar',
       isCompleted: random.nextBool(),
       questions: List.generate(
-        5,
+        15,
         (index) => QuestionModel.empty(),
       ),
     );
