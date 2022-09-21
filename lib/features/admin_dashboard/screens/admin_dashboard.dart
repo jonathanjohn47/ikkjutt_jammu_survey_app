@@ -16,14 +16,6 @@ class AdminDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //set statusbar color
-    Future.delayed(Duration(milliseconds: 1), () {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: AppColors.secondaryHeaderColor.shade700,
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.light,
-      ));
-    });
     return ColoredBox(
       color: Colors.white,
       child: Scaffold(

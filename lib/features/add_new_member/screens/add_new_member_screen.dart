@@ -24,7 +24,7 @@ class AddNewMemberScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: SizedBox(
           width: Get.width,
-          height: Get.height - 2 * kToolbarHeight,
+          height: Get.height,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
