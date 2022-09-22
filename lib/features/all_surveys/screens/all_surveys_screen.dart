@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/all_reports_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/report_screen.dart';
-import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/take_survey_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/widgets/custom_divider.dart';
 
 import '../../../core/app_colors.dart';
@@ -36,7 +36,9 @@ class AllSurveysScreen extends StatelessWidget {
                               allSurveysGetController.allSurveys[index],
                         ));
                   } else {
-                    Get.to(() => TakeSurveyScreen());
+                    Get.to(() => AllReportsScreen(
+                        surveyModel:
+                            allSurveysGetController.allSurveys[index]));
                   }
                 },
                 child: Card(

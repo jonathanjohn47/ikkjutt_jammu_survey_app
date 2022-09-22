@@ -95,7 +95,7 @@ class NewSurveyGetController extends GetxController {
                                   longitude:
                                       location == null ? 0 : location.longitude,
                                 ),
-                                questionNumber: questions.length + 1,
+                                questionNumber: questions.length + 1, questionType: 1
                               );
                               questions.add(questionModel);
                               Get.back();
@@ -152,6 +152,7 @@ class NewSurveyGetController extends GetxController {
                                     questionText: questionTextController.text,
                                   ),
                                   questionNumber: questions.length + 1,
+                                  questionType: 2,
                                 );
                                 questions.add(questionModel);
                                 Get.back();
@@ -280,6 +281,7 @@ class NewSurveyGetController extends GetxController {
                                     options: options,
                                   ),
                                   questionNumber: questions.length + 1,
+                                  questionType: 3,
                                 );
                                 questions.add(questionModel);
                                 Get.back();
@@ -408,6 +410,7 @@ class NewSurveyGetController extends GetxController {
                                     questionText: questionTextController.text,
                                     options: options,
                                   ),
+                                  questionType: 4,
                                 );
                                 questions.add(questionModel);
                                 Get.back();
@@ -467,6 +470,7 @@ class NewSurveyGetController extends GetxController {
                                   numberTypeQuestion: NumberTypeQuestion(
                                     questionText: questionTextController.text,
                                   ),
+                                  questionType: 5,
                                 );
                                 questions.add(questionModel);
                                 Get.back();

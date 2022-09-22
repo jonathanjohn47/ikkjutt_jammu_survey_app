@@ -18,9 +18,13 @@ class ReportScreenGetController extends GetxController {
     ReportModel reportModel = ReportModel.empty();
     for (int i = 0; i < 10; i++) {
       ReportModel newReportModel = ReportModel(
-          DateTime.now().millisecondsSinceEpoch.toString(),
-          reportModel.surveyModel,
-          reportModel.title);
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        title: reportModel.title,
+        description: reportModel.description,
+        surveyModel: reportModel.surveyModel,
+        latitude: reportModel.latitude,
+        longitude: reportModel.longitude,
+      );
       allReports.add(newReportModel);
     }
   }
@@ -131,41 +135,41 @@ class ReportScreenGetController extends GetxController {
                           .surveyModel
                           .questions
                           .map((e) => pw.Padding(
-                          padding: pw.EdgeInsets.all(4),
-                          child: pw.Text(
-                            e.questionText,
-                            style: pw.TextStyle(
-                              fontSize: 20,
-                              fontWeight: pw.FontWeight.bold,
-                              font: font,
-                            ),
-                          )))
+                              padding: pw.EdgeInsets.all(4),
+                              child: pw.Text(
+                                e.questionText,
+                                style: pw.TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: pw.FontWeight.bold,
+                                  font: font,
+                                ),
+                              )))
                           .toList(),
                     ]),
                     ...allReports
                         .map((e) => pw.TableRow(children: [
-                      pw.Padding(
-                          padding: pw.EdgeInsets.all(4),
-                          child: pw.Text(
-                            (allReports.indexOf(e) + 1).toString(),
-                            style: pw.TextStyle(
-                              fontSize: 20,
-                              fontWeight: pw.FontWeight.bold,
-                              font: font,
-                            ),
-                          )),
-                      ...e.surveyModel.questions
-                          .map((e) => pw.Padding(
-                          padding: pw.EdgeInsets.all(4),
-                          child: pw.Text(
-                            e.answerText,
-                            style: pw.TextStyle(
-                              fontSize: 20,
-                              font: font,
-                            ),
-                          )))
-                          .toList(),
-                    ]))
+                              pw.Padding(
+                                  padding: pw.EdgeInsets.all(4),
+                                  child: pw.Text(
+                                    (allReports.indexOf(e) + 1).toString(),
+                                    style: pw.TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: pw.FontWeight.bold,
+                                      font: font,
+                                    ),
+                                  )),
+                              ...e.surveyModel.questions
+                                  .map((e) => pw.Padding(
+                                      padding: pw.EdgeInsets.all(4),
+                                      child: pw.Text(
+                                        e.answerText,
+                                        style: pw.TextStyle(
+                                          fontSize: 20,
+                                          font: font,
+                                        ),
+                                      )))
+                                  .toList(),
+                            ]))
                         .toList(),
                   ]),
             ];

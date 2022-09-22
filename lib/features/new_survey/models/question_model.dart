@@ -141,6 +141,7 @@ class QuestionModel {
   SelectOneOptionQuestion? selectOneOptionQuestion;
   SelectMultipleOptionsQuestion? selectMultipleOptionsQuestion;
   NumberTypeQuestion? numberTypeQuestion;
+  int questionType;
 
   QuestionModel({
     required this.questionNumber,
@@ -149,6 +150,7 @@ class QuestionModel {
     this.selectOneOptionQuestion,
     this.selectMultipleOptionsQuestion,
     this.numberTypeQuestion,
+    required this.questionType,
   }) : assert(freeTextQuestionModel != null ||
             trueFalseQuestionModel != null ||
             selectOneOptionQuestion != null ||
@@ -175,6 +177,7 @@ class QuestionModel {
       numberTypeQuestion: json['number_type_question'] != null
           ? NumberTypeQuestion.fromJson(json['number_type_question'])
           : null,
+      questionType: json['question_type'],
     );
   }
 
@@ -195,6 +198,7 @@ class QuestionModel {
           : null,
       'number_type_question':
           numberTypeQuestion != null ? numberTypeQuestion!.toJson() : null,
+      'question_type': questionType,
     };
   }
 
@@ -238,6 +242,7 @@ class QuestionModel {
         questionText: "How are you?",
         answerText: "I am good.",
       ),
+      questionType: 1,
     );
   }
 
@@ -250,6 +255,7 @@ class QuestionModel {
         questionText: "Are you good?",
         answer: true,
       ),
+      questionType: 2,
     );
   }
 
@@ -262,6 +268,7 @@ class QuestionModel {
         answer: "Red",
         options: ["Red", "Green", "Blue"],
       ),
+      questionType: 3,
     );
   }
 
@@ -274,6 +281,7 @@ class QuestionModel {
         answers: ["Red", "Green", "Blue"],
         options: ["Green", "Blue"],
       ),
+      questionType: 4,
     );
   }
 
@@ -285,6 +293,7 @@ class QuestionModel {
         questionText: "How old are you?",
         answer: 20,
       ),
+      questionType: 5,
     );
   }
 
