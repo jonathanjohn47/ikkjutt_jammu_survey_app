@@ -28,9 +28,11 @@ class MemberProfileScreen extends StatelessWidget {
                 ' ' +
                 memberProfileScreenGetController.newMemberModel.value.lastName,
             actions: [
-              IconButton(onPressed: () {
-                memberProfileScreenGetController.deleteMember();
-              }, icon: Icon(MdiIcons.delete))
+              IconButton(
+                  onPressed: () {
+                    memberProfileScreenGetController.deleteMember();
+                  },
+                  icon: Icon(MdiIcons.delete))
             ],
           )),
       body: SizedBox(

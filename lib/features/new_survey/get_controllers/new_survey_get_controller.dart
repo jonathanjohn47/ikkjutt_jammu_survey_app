@@ -88,15 +88,17 @@ class NewSurveyGetController extends GetxController {
                           onPressed: () {
                             Geofence.getCurrentLocation().then((location) {
                               QuestionModel questionModel = QuestionModel(
-                                freeTextQuestionModel: FreeTextQuestionModel(
-                                  questionText: questionTextController.text,
-                                  latitude:
-                                      location == null ? 0 : location.latitude,
-                                  longitude:
-                                      location == null ? 0 : location.longitude,
-                                ),
-                                questionNumber: questions.length + 1, questionType: 1
-                              );
+                                  freeTextQuestionModel: FreeTextQuestionModel(
+                                    questionText: questionTextController.text,
+                                    latitude: location == null
+                                        ? 0
+                                        : location.latitude,
+                                    longitude: location == null
+                                        ? 0
+                                        : location.longitude,
+                                  ),
+                                  questionNumber: questions.length + 1,
+                                  questionType: 1);
                               questions.add(questionModel);
                               Get.back();
                             });
