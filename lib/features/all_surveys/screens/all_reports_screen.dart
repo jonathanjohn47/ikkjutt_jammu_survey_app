@@ -28,7 +28,8 @@ class AllReportsScreen extends StatelessWidget {
           title: 'Reports for ${surveyModel.title}',
           actions: [
             TextButton(
-                child: TextWithFormat('Finish Survey', color: AppColors.secondaryHeaderColor.shade700),
+                child: TextWithFormat('Finish Survey',
+                    color: AppColors.secondaryHeaderColor.shade700),
                 onPressed: () {
                   Get.dialog(AlertDialog(
                     title: Text('Finish Survey'),
