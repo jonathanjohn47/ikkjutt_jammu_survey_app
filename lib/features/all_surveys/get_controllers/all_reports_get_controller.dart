@@ -18,7 +18,7 @@ class AllReportsGetController extends GetxController {
         description: 'Description $i',
         latitude: 0.0,
         longitude: 0.0,
-        surveyModel: SurveyModel.empty(),
+        surveyModel: surveyModel,
       ));
     }
   }

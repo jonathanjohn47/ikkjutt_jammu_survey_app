@@ -23,169 +23,151 @@ class TakeSurveyScreen extends StatelessWidget {
           title: 'Take Survey',
         ),
       ),
-      body: FutureBuilder<bool>(
-          future: Future.delayed(Duration(milliseconds: 500), () => true),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return CarouselSlider(
-                options: CarouselOptions(
-                  height: Get.height,
-                  enlargeCenterPage: true,
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  pauseAutoPlayOnTouch: true,
-                  aspectRatio: 2.0,
-                  onPageChanged: (index, reason) {},
-                ),
-                items: surveyModel.questions.map((question) {
-                  if (question.questionType == 1) {
-                    return Column(
-                      children: [
-                        TextWithFormat(
-                          question.freeTextQuestionModel!.questionText,
-                          fontSize: 20,
-                          bold: true,
-                        ),
-                        TextField(
-                          controller: takeSurveyGetController.answersVariable[
-                              surveyModel.questions.indexOf(question)],
-                        ),
-                      ],
-                    );
-                  } else if (question.questionType == 2) {
-                    return Column(
-                      children: [
-                        TextWithFormat(
-                          question.trueFalseQuestionModel!.questionText,
-                          fontSize: 20,
-                          bold: true,
-                        ),
-                        Row(
-                          children: [
-                            TextWithFormat(
-                              'True',
-                              fontSize: 20,
-                              bold: true,
-                            ),
-                            Checkbox(
-                              value: takeSurveyGetController.answersVariable[
-                                  surveyModel.questions.indexOf(question)][0],
-                              onChanged: (value) {
-                                takeSurveyGetController.answersVariable[
-                                        surveyModel.questions.indexOf(question)]
-                                    [0] = value;
-                                takeSurveyGetController.answersVariable[
-                                        surveyModel.questions.indexOf(question)]
-                                    [1] = !value!;
-                                takeSurveyGetController.update();
-                              },
-                            ),
-                            TextWithFormat(
-                              'False',
-                              fontSize: 20,
-                              bold: true,
-                            ),
-                            Checkbox(
-                              value: takeSurveyGetController.answersVariable[
-                                  surveyModel.questions.indexOf(question)][1],
-                              onChanged: (value) {
-                                takeSurveyGetController.answersVariable[
-                                        surveyModel.questions.indexOf(question)]
-                                    [1] = value;
-                                takeSurveyGetController.answersVariable[
-                                        surveyModel.questions.indexOf(question)]
-                                    [0] = !value!;
-                                takeSurveyGetController.update();
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  } else if (question.questionType == 3) {
-                    return Column(
-                      children: [
-                        TextWithFormat(
-                          question.selectOneOptionQuestion!.questionText,
-                          fontSize: 20,
-                          bold: true,
-                        ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount:
-                              question.selectOneOptionQuestion!.options.length,
-                          itemBuilder: (context, index) {
-                            return Row(
-                              children: [
-                                TextWithFormat(
-                                  question
-                                      .selectOneOptionQuestion!.options[index],
-                                  fontSize: 20,
-                                  bold: true,
-                                ),
-                                Radio(
-                                  value: index,
-                                  groupValue: takeSurveyGetController
-                                          .answersVariable[
-                                      surveyModel.questions.indexOf(question)],
-                                  onChanged: (value) {
-                                    takeSurveyGetController.answersVariable[
-                                        question.questionNumber - 1] = value;
-                                    takeSurveyGetController.update();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ],
-                    );
-                  } else if (question.questionType == 4) {
-                    return Column(
-                      children: [
-                        TextWithFormat(
-                          question.selectMultipleOptionsQuestion!.questionText,
-                          fontSize: 20,
-                          bold: true,
-                        ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: question
-                              .selectMultipleOptionsQuestion!.options.length,
-                          itemBuilder: (context, index) {
-                            return Row(
-                              children: [
-                                TextWithFormat(
-                                  question.selectMultipleOptionsQuestion!
-                                      .options[index],
-                                  fontSize: 20,
-                                  bold: true,
-                                ),
-                                Checkbox(
-                                  value:
-                                      takeSurveyGetController.answersVariable[
-                                          surveyModel.questions
-                                              .indexOf(question)][index],
-                                  onChanged: (value) {
-                                    takeSurveyGetController.answersVariable[
-                                            question.questionNumber - 1]
-                                        [index] = value;
-                                    takeSurveyGetController.update();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ],
-                    );
-                  }
-                  return Container();
-                }).toList(),
+      body: Obx(() {
+        return CarouselSlider(
+          options: CarouselOptions(
+            height: Get.height,
+            enlargeCenterPage: true,
+            autoPlayAnimationDuration: Duration(milliseconds: 800),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            pauseAutoPlayOnTouch: true,
+            aspectRatio: 2.0,
+            onPageChanged: (index, reason) {},
+          ),
+          items: surveyModel.questions.map((question) {
+            if (question.questionType == 1) {
+              return Column(
+                children: [
+                  TextWithFormat(
+                    question.freeTextQuestionModel!.questionText,
+                    fontSize: 20,
+                    bold: true,
+                  ),
+                  TextField(
+                    controller: takeSurveyGetController.answersVariable[
+                        surveyModel.questions.indexOf(question)],
+                  ),
+                ],
+              );
+            } else if (question.questionType == 2) {
+              return Column(
+                children: [
+                  TextWithFormat(
+                    question.trueFalseQuestionModel!.questionText,
+                    fontSize: 20,
+                    bold: true,
+                  ),
+                  Row(
+                    children: [
+                      TextWithFormat(
+                        'True',
+                        fontSize: 20,
+                        bold: true,
+                      ),
+                      Checkbox(
+                        value: takeSurveyGetController
+                            .answers[surveyModel.questions.indexOf(question)],
+                        onChanged: (value) {
+                          takeSurveyGetController.answers[
+                              surveyModel.questions.indexOf(question)] = value!;
+                        },
+                      ),
+                      TextWithFormat(
+                        takeSurveyGetController
+                            .answers[surveyModel.questions.indexOf(question)]
+                            .toString(),
+                        fontSize: 20,
+                        bold: true,
+                      ),
+                      Checkbox(
+                        value: takeSurveyGetController.answersVariable[
+                            surveyModel.questions.indexOf(question)][1],
+                        onChanged: (value) {
+                          takeSurveyGetController.answersVariable[
+                                  surveyModel.questions.indexOf(question)][1] =
+                              value!;
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            } else if (question.questionType == 3) {
+              return Column(
+                children: [
+                  TextWithFormat(
+                    question.selectOneOptionQuestion!.questionText,
+                    fontSize: 20,
+                    bold: true,
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: question.selectOneOptionQuestion!.options.length,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        children: [
+                          TextWithFormat(
+                            question.selectOneOptionQuestion!.options[index],
+                            fontSize: 20,
+                            bold: true,
+                          ),
+                          Radio(
+                            value: index,
+                            groupValue: takeSurveyGetController.answersVariable[
+                                surveyModel.questions.indexOf(question)],
+                            onChanged: (value) {
+                              takeSurveyGetController.answersVariable[
+                                  question.questionNumber - 1] = value;
+                              takeSurveyGetController.update();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              );
+            } else if (question.questionType == 4) {
+              return Column(
+                children: [
+                  TextWithFormat(
+                    question.selectMultipleOptionsQuestion!.questionText,
+                    fontSize: 20,
+                    bold: true,
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount:
+                        question.selectMultipleOptionsQuestion!.options.length,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        children: [
+                          TextWithFormat(
+                            question
+                                .selectMultipleOptionsQuestion!.options[index],
+                            fontSize: 20,
+                            bold: true,
+                          ),
+                          Checkbox(
+                            value: takeSurveyGetController.answers[
+                                surveyModel.questions.indexOf(question)][index],
+                            onChanged: (value) {
+                              takeSurveyGetController.answers[
+                                      surveyModel.questions.indexOf(question)]
+                                  [index] = value!;
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
               );
             }
             return Container();
-          }),
+          }).toList(),
+        );
+      }),
     );
   }
 }

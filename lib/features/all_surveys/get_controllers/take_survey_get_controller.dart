@@ -7,14 +7,12 @@ class TakeSurveyGetController extends GetxController {
 
   TakeSurveyGetController(this.surveyModel);
 
-  List<dynamic> answersVariable = [];
+  RxList<dynamic> answersVariable = [].obs;
+  RxList<dynamic> answers = [].obs;
 
   void addAnswerVariable() {
-    /*FreeTextQuestionModel? freeTextQuestionModel;
-  TrueFalseQuestionModel? trueFalseQuestionModel;
-  SelectOneOptionQuestion? selectOneOptionQuestion;
-  SelectMultipleOptionsQuestion? selectMultipleOptionsQuestion;*/
     surveyModel.questions.forEach((question) {
+      print("Question type: ${question.questionType}");
       if (question.questionType == 1) {
         answersVariable.add(TextEditingController());
       } else if (question.questionType == 2) {
@@ -23,6 +21,21 @@ class TakeSurveyGetController extends GetxController {
         answersVariable.add(question.selectOneOptionQuestion!.options);
       } else if (question.questionType == 4) {
         answersVariable.add(question.selectMultipleOptionsQuestion!.options);
+      }
+    });
+
+    answers.value = List.generate(answersVariable.length, (index) {
+      if (surveyModel.questions[index].questionType == 1) {
+        return '';
+      } else if (surveyModel.questions[index].questionType == 2) {
+        return false;
+      } else if (surveyModel.questions[index].questionType == 3) {
+        return surveyModel.questions[index].selectOneOptionQuestion!.options[0];
+      } else if (surveyModel.questions[index].questionType == 4) {
+        return surveyModel
+            .questions[index].selectMultipleOptionsQuestion!.options[0];
+      } else {
+        return '';
       }
     });
   }

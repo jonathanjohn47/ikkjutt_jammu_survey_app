@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "536955079250",
+    "project_id": "ikkjutt-jammu",
+    "storage_bucket": "ikkjutt-jammu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536955079250:android:36a37f94110a9cfa0aad8b",
+        "android_client_info": {
+          "package_name": "com.app.ikkjutt_jammu_survey_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536955079250-h0ijst0fhsbvtp2bprtu9kdp6454e8hl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.ikkjutt_jammu_survey_app",
+            "certificate_hash": "70891c37f38523cbce1ab6472374f80c917a21e4"
+          }
+        },
+        {
+          "client_id": "536955079250-3vu5vo1j2dmb18c45iq62qkdi8brugg3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh6CuM1Zv1QqkJKySucAxYjWL0kCz3FoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536955079250-3vu5vo1j2dmb18c45iq62qkdi8brugg3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
