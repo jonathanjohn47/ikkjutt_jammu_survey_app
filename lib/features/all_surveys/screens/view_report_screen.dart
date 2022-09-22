@@ -34,7 +34,7 @@ class ViewReportScreen extends StatelessWidget {
                 ...reportModel.surveyModel.questions.map((e) {
                   return TableRow(
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey, width: 0.2)),
+                          border: Border.all(color: Colors.grey, width: 0.3)),
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),

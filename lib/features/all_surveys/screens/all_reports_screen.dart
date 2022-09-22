@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ikkjutt_jammu_survey_app/core/app_colors.dart';
 import 'package:ikkjutt_jammu_survey_app/features/all_surveys/get_controllers/all_reports_get_controller.dart';
 import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/take_survey_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/view_report_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/features/new_survey/models/survey_model.dart';
 import 'package:ikkjutt_jammu_survey_app/widgets/custom_divider.dart';
 import 'package:ikkjutt_jammu_survey_app/widgets/standard_button.dart';
+import 'package:ikkjutt_jammu_survey_app/widgets/text_with_format.dart';
 
 import '../../../widgets/standard_app_bar.dart';
 
@@ -23,7 +25,33 @@ class AllReportsScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: StandardAppBar(
-          title: 'Reports',
+          title: 'Reports for ${surveyModel.title}',
+          actions: [
+            TextButton(
+                child: TextWithFormat('Finish Survey', color: AppColors.secondaryHeaderColor.shade700),
+                onPressed: () {
+                  Get.dialog(AlertDialog(
+                    title: Text('Finish Survey'),
+                    content:
+                        Text('Are you sure you want to finish this survey?'),
+                    actions: [
+                      StandardButton(
+                        text: 'Yes',
+                        onPressed: () {
+                          Get.back();
+                          Get.back();
+                        },
+                      ),
+                      StandardButton(
+                        text: 'No',
+                        onPressed: () {
+                          Get.back();
+                        },
+                      ),
+                    ],
+                  ));
+                })
+          ],
         ),
       ),
       body: Obx(() {
