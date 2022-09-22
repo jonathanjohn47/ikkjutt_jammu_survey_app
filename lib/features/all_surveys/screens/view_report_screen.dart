@@ -22,45 +22,49 @@ class ViewReportScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: SizedBox(
           width: Get.width,
-          child: Table(
-            columnWidths: {
-              0: FlexColumnWidth(1),
-              1: FlexColumnWidth(2),
-              2: FlexColumnWidth(3),
-            },
-            children: [
-              ...reportModel.surveyModel.questions.map((e) {
-                return TableRow(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 0.2)),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextWithFormat(
-                          (reportModel.surveyModel.questions.indexOf(e) + 1)
-                              .toString(),
-                          italic: true,
-                          color: Colors.grey,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Table(
+              columnWidths: {
+                0: FlexColumnWidth(1),
+                1: FlexColumnWidth(2),
+                2: FlexColumnWidth(3),
+              },
+              children: [
+                ...reportModel.surveyModel.questions.map((e) {
+                  return TableRow(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 0.2)),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextWithFormat(
+                            (reportModel.surveyModel.questions.indexOf(e) + 1)
+                                .toString(),
+                            italic: true,
+                            color: Colors.grey,
+                            bold: true,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextWithFormat(
-                          e.questionText,
-                          maxLines: 10,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextWithFormat(
+                            e.questionText,
+                            maxLines: 10,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextWithFormat(
-                          e.answerText,
-                          maxLines: 10,
-                          bold: true,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextWithFormat(
+                            e.answerText,
+                            maxLines: 10,
+                            bold: true,
+                          ),
                         ),
-                      ),
-                    ]);
-              }).toList()
-            ],
+                      ]);
+                }).toList()
+              ],
+            ),
           ),
         ),
       ),
