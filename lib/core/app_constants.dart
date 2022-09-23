@@ -3,4 +3,6 @@ class AppConstants {
   static String temporarySigningInPassword = '112233';
 
   static String admins = "Admins";
+
+  static String surveys = "Surveys";
 }

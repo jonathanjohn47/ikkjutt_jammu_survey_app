@@ -1,11 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_geofence/geofence.dart';
 import 'package:get/get.dart';
 import 'package:ikkjutt_jammu_survey_app/core/app_colors.dart';
+import 'package:ikkjutt_jammu_survey_app/features/new_survey/models/survey_model.dart';
 import 'package:ikkjutt_jammu_survey_app/widgets/text_with_format.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../../core/app_constants.dart';
 import '../../add_new_member/models/member_model.dart';
 import '../models/question_model.dart';
 
@@ -542,11 +546,36 @@ class NewSurveyGetController extends GetxController {
         ),
       ),
       actions: [
-        TextButton(onPressed: () {}, child: Text('Cancel')),
         TextButton(
             onPressed: () {
               Get.back();
-              Get.back();
+            },
+            child: Text('Cancel')),
+        TextButton(
+            onPressed: () {
+              if (titleController.text != '' &&
+                  descriptionController.text != '' &&
+                  questions.isNotEmpty &&
+                  areaController.text != '') {
+                String surveyID = Uuid().v4();
+                FirebaseFirestore.instance
+                    .collection(AppConstants.surveys)
+                    .doc(surveyID)
+                    .set(SurveyModel(
+                            id: surveyID,
+                            title: titleController.text,
+                            description: descriptionController.text,
+                            scheduledAt: scheduledAt.value,
+                            area: areaController.text,
+                            isCompleted: false,
+                            questions: questions)
+                        .toJson());
+                Get.back();
+                Get.back();
+              } else {
+                Get.snackbar('Error', 'Please fill all the fields',
+                    colorText: Colors.white, backgroundColor: Colors.red);
+              }
             },
             child: Text('Submit')),
       ],

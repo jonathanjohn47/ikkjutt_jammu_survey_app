@@ -42,6 +42,7 @@ class NewSurveyScreen extends StatelessWidget {
                       hintText: 'Enter title',
                       border: OutlineInputBorder(),
                     ),
+                    controller: newSurveyGetController.titleController,
                   ),
                   SizedBox(
                     height: 10,
@@ -54,17 +55,22 @@ class NewSurveyScreen extends StatelessWidget {
                         border: OutlineInputBorder(),
                       ),
                       maxLines: 50,
+                      controller: newSurveyGetController.descriptionController,
                     ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   TextFormField(
+                    controller: newSurveyGetController.areaController,
                     decoration: InputDecoration(
                       labelText: 'Area',
                       hintText: 'Enter area',
                       border: OutlineInputBorder(),
                     ),
+                    onFieldSubmitted: (value) {
+                      TextInputAction.done;
+                    },
                   ),
                   SizedBox(
                     height: 10,
