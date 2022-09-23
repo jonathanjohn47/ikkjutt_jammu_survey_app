@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ikkjutt_jammu_survey_app/core/app_constants.dart';
 import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/all_reports_screen.dart';
 import 'package:ikkjutt_jammu_survey_app/features/all_surveys/screens/report_screen.dart';
+import 'package:ikkjutt_jammu_survey_app/features/new_survey/models/survey_model.dart';
 import 'package:ikkjutt_jammu_survey_app/widgets/custom_divider.dart';
 
 import '../../../core/app_colors.dart';
@@ -26,54 +31,62 @@ class AllSurveysScreen extends StatelessWidget {
               child: StandardAppBar(
                 title: 'All Surveys',
               )),
-          body: ListView.builder(
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  if (allSurveysGetController.allSurveys[index].isCompleted) {
-                    Get.to(() => ReportScreen(
-                          surveyModel:
-                              allSurveysGetController.allSurveys[index],
-                        ));
-                  } else {
-                    Get.to(() => AllReportsScreen(
-                        surveyModel:
-                            allSurveysGetController.allSurveys[index]));
-                  }
-                },
-                child: Card(
-                  elevation:
-                      allSurveysGetController.allSurveys[index].isCompleted
-                          ? 0
-                          : 2,
-                  color: allSurveysGetController.allSurveys[index].isCompleted
-                      ? Colors.transparent
-                      : Colors.white,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text(
-                            allSurveysGetController.allSurveys[index].title),
-                        subtitle: Text(allSurveysGetController
-                            .allSurveys[index].description),
-                      ),
-                      CustomDivider(
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
-                      ListTile(
-                        title: Text('Number of Questions:'),
-                        trailing: Text(allSurveysGetController
-                            .allSurveys[index].questions.length
-                            .toString()),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-            itemCount: allSurveysGetController.allSurveys.length,
-          )),
+          body: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection(AppConstants.surveys)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<SurveyModel> allSurveys = snapshot.data!.docs
+                      .map((e) => SurveyModel.fromJson(
+                          jsonDecode(jsonEncode(e.data()))))
+                      .toList();
+                  allSurveys.sort((a, b) =>
+                      b.scheduledAt.compareTo(a.scheduledAt)); // sort by date
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      SurveyModel surveyModel = allSurveys[index];
+                      return GestureDetector(
+                        onTap: () {
+                          if (surveyModel.isCompleted) {
+                            Get.to(() => ReportScreen(
+                                  surveyModel: surveyModel,
+                                ));
+                          } else {
+                            Get.to(() =>
+                                AllReportsScreen(surveyModel: surveyModel));
+                          }
+                        },
+                        child: Card(
+                          elevation: surveyModel.isCompleted ? 0 : 2,
+                          color: surveyModel.isCompleted
+                              ? Colors.transparent
+                              : Colors.white,
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: Text(surveyModel.title),
+                                subtitle: Text(surveyModel.description),
+                              ),
+                              CustomDivider(
+                                thickness: 1,
+                                color: Colors.grey,
+                              ),
+                              ListTile(
+                                title: Text('Number of Questions:'),
+                                trailing: Text(
+                                    surveyModel.questions.length.toString()),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    itemCount: snapshot.data!.docs.length,
+                  );
+                }
+                return Center(child: CircularProgressIndicator());
+              })),
     );
   }
 }

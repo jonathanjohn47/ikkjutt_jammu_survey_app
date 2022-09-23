@@ -122,7 +122,9 @@ class NumberTypeQuestion {
   factory NumberTypeQuestion.fromJson(Map<String, dynamic> json) {
     return NumberTypeQuestion(
       questionText: json['question_text'],
-      answer: double.parse(json['answer'].toString()),
+      answer: json['answer'] == null
+          ? null
+          : double.parse(json['answer'].toString()),
     );
   }
 
@@ -161,21 +163,25 @@ class QuestionModel {
     return QuestionModel(
       questionNumber: json['question_number'],
       freeTextQuestionModel: json['free_text_question_model'] != null
-          ? FreeTextQuestionModel.fromJson(json['free_text_question_model'])
+          ? FreeTextQuestionModel.fromJson(
+              json['free_text_question_model'] as Map<String, dynamic>)
           : null,
       trueFalseQuestionModel: json['true_false_question_model'] != null
-          ? TrueFalseQuestionModel.fromJson(json['true_false_question_model'])
+          ? TrueFalseQuestionModel.fromJson(
+              json['true_false_question_model'] as Map<String, dynamic>)
           : null,
       selectOneOptionQuestion: json['select_one_option_question'] != null
-          ? SelectOneOptionQuestion.fromJson(json['select_one_option_question'])
+          ? SelectOneOptionQuestion.fromJson(
+              json['select_one_option_question'] as Map<String, dynamic>)
           : null,
-      selectMultipleOptionsQuestion:
-          json['select_multiple_options_question'] != null
-              ? SelectMultipleOptionsQuestion.fromJson(
-                  json['select_multiple_options_question'])
-              : null,
+      selectMultipleOptionsQuestion: json['select_multiple_options_question'] !=
+              null
+          ? SelectMultipleOptionsQuestion.fromJson(
+              json['select_multiple_options_question'] as Map<String, dynamic>)
+          : null,
       numberTypeQuestion: json['number_type_question'] != null
-          ? NumberTypeQuestion.fromJson(json['number_type_question'])
+          ? NumberTypeQuestion.fromJson(
+              json['number_type_question'] as Map<String, dynamic>)
           : null,
       questionType: json['question_type'],
     );

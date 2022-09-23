@@ -7,21 +7,23 @@ import '../../admin_dashboard/screens/admin_dashboard.dart';
 
 class LoginGetController extends GetxController {
   void checkIfUserIsLoggedIn() {
-    String? currentUserEmail = FirebaseAuth.instance.currentUser!.email;
-    if (currentUserEmail == null) {
-      String phoneNumber = FirebaseAuth.instance.currentUser!.phoneNumber!;
-    } else {
-      FirebaseFirestore.instance
-          .collection(AppConstants.admins)
-          .doc(currentUserEmail)
-          .get()
-          .then((value) {
-        if (value.exists) {
-          Get.offAll(() => AdminDashboard());
-        } else {
-          FirebaseAuth.instance.signOut();
-        }
-      });
+    if (FirebaseAuth.instance.currentUser != null) {
+      String? currentUserEmail = FirebaseAuth.instance.currentUser!.email;
+      if (currentUserEmail == null) {
+        String phoneNumber = FirebaseAuth.instance.currentUser!.phoneNumber!;
+      } else {
+        FirebaseFirestore.instance
+            .collection(AppConstants.admins)
+            .doc(currentUserEmail)
+            .get()
+            .then((value) {
+          if (value.exists) {
+            Get.offAll(() => AdminDashboard());
+          } else {
+            FirebaseAuth.instance.signOut();
+          }
+        });
+      }
     }
   }
 
