@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ikkjutt_jammu_survey_app/core/app_colors.dart';
+import 'package:ikkjutt_jammu_survey_app/features/authentication/getx_controllers/login_get_controller.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'login_page_admin.dart';
@@ -7,6 +9,8 @@ import 'login_page_member.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
+
+  LoginGetController _loginGetController = Get.put(LoginGetController());
 
   @override
   Widget build(BuildContext context) {

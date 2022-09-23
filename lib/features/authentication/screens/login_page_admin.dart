@@ -60,12 +60,16 @@ class LoginPageAdmin extends StatelessWidget {
                     obscureText: !loginAdminController.showPassword.value,
                   );
                 }),
-                StandardButton(
-                  text: 'Login',
-                  onPressed: () {
-                    loginAdminController.login();
-                  },
-                ),
+                Obx(() {
+                  return loginAdminController.showLoader.value
+                      ? CircularProgressIndicator()
+                      : StandardButton(
+                          text: 'Login',
+                          onPressed: () {
+                            loginAdminController.login();
+                          },
+                        );
+                }),
               ],
             ),
           ),
