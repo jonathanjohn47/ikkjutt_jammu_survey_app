@@ -14,20 +14,7 @@ class ReportScreenGetController extends GetxController {
 
   RxList<ReportModel> allReports = <ReportModel>[].obs;
 
-  void getAllReports() {
-    ReportModel reportModel = ReportModel.empty();
-    for (int i = 0; i < 10; i++) {
-      ReportModel newReportModel = ReportModel(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        title: reportModel.title,
-        description: reportModel.description,
-        surveyModel: reportModel.surveyModel,
-        latitude: reportModel.latitude,
-        longitude: reportModel.longitude,
-      );
-      allReports.add(newReportModel);
-    }
-  }
+  void getAllReports() {}
 
   Future<void> saveAsPdf() async {
     final pdf = pw.Document();

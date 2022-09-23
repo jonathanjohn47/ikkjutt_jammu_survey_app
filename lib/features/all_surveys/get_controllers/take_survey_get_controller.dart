@@ -5,10 +5,16 @@ import 'package:ikkjutt_jammu_survey_app/features/new_survey/models/survey_model
 class TakeSurveyGetController extends GetxController {
   final SurveyModel surveyModel;
 
+  TextEditingController titleController = TextEditingController();
+
+  TextEditingController descriptionController = TextEditingController();
+
   TakeSurveyGetController(this.surveyModel);
 
   RxList<dynamic> answersVariable = [].obs;
   RxList<dynamic> answers = [].obs;
+
+  RxInt questionIndex = 0.obs;
 
   void addAnswerVariable() {
     surveyModel.questions.forEach((question) {

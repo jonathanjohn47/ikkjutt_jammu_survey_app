@@ -102,7 +102,8 @@ class NewSurveyGetController extends GetxController {
                                         : location.longitude,
                                   ),
                                   questionNumber: questions.length + 1,
-                                  questionType: 1);
+                                  questionType: 1,
+                                  id: Uuid().v4());
                               questions.add(questionModel);
                               Get.back();
                             });
@@ -159,6 +160,7 @@ class NewSurveyGetController extends GetxController {
                                   ),
                                   questionNumber: questions.length + 1,
                                   questionType: 2,
+                                  id: Uuid().v4(),
                                 );
                                 questions.add(questionModel);
                                 Get.back();
@@ -288,6 +290,7 @@ class NewSurveyGetController extends GetxController {
                                   ),
                                   questionNumber: questions.length + 1,
                                   questionType: 3,
+                                  id: Uuid().v4(),
                                 );
                                 questions.add(questionModel);
                                 Get.back();
@@ -417,6 +420,7 @@ class NewSurveyGetController extends GetxController {
                                     options: options,
                                   ),
                                   questionType: 4,
+                                  id: Uuid().v4(),
                                 );
                                 questions.add(questionModel);
                                 Get.back();
@@ -477,6 +481,7 @@ class NewSurveyGetController extends GetxController {
                                     questionText: questionTextController.text,
                                   ),
                                   questionType: 5,
+                                  id: Uuid().v4(),
                                 );
                                 questions.add(questionModel);
                                 Get.back();

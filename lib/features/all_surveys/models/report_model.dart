@@ -9,6 +9,7 @@ class ReportModel {
   SurveyModel surveyModel;
   double latitude;
   double longitude;
+  DateTime submittedAt;
 
   ReportModel(
       {required this.id,
@@ -16,7 +17,8 @@ class ReportModel {
       required this.title,
       required this.description,
       required this.latitude,
-      required this.longitude});
+      required this.longitude,
+      required this.submittedAt});
 
   factory ReportModel.fromJson(Map<String, dynamic> json) {
     return ReportModel(
@@ -26,6 +28,7 @@ class ReportModel {
       latitude: json['latitude'],
       longitude: json['longitude'],
       surveyModel: SurveyModel.fromJson(json['surveyModel']),
+      submittedAt: DateTime.fromMillisecondsSinceEpoch(json['submittedAt']),
     );
   }
 
@@ -37,6 +40,7 @@ class ReportModel {
       'latitude': latitude,
       'longitude': longitude,
       'surveyModel': surveyModel.toJson(),
+      'submittedAt': submittedAt.millisecondsSinceEpoch,
     };
   }
 
@@ -49,6 +53,7 @@ class ReportModel {
       latitude: 0.0,
       longitude: 0.0,
       surveyModel: SurveyModel.empty(),
+      submittedAt: DateTime.now(),
     );
   }
 }

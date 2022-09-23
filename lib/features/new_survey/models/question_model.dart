@@ -96,7 +96,8 @@ class SelectMultipleOptionsQuestion {
   factory SelectMultipleOptionsQuestion.fromJson(Map<String, dynamic> json) {
     return SelectMultipleOptionsQuestion(
       questionText: json['question_text'],
-      answers: List<String>.from(json['answers']),
+      answers:
+          json['answers'] == null ? null : List<String>.from(json['answers']),
       options: List<String>.from(json['options']),
     );
   }
@@ -137,6 +138,7 @@ class NumberTypeQuestion {
 }
 
 class QuestionModel {
+  String id;
   int questionNumber;
   FreeTextQuestionModel? freeTextQuestionModel;
   TrueFalseQuestionModel? trueFalseQuestionModel;
@@ -146,6 +148,7 @@ class QuestionModel {
   int questionType;
 
   QuestionModel({
+    required this.id,
     required this.questionNumber,
     this.freeTextQuestionModel,
     this.trueFalseQuestionModel,
@@ -161,6 +164,7 @@ class QuestionModel {
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) {
     return QuestionModel(
+      id: json['id'],
       questionNumber: json['question_number'],
       freeTextQuestionModel: json['free_text_question_model'] != null
           ? FreeTextQuestionModel.fromJson(
@@ -189,6 +193,7 @@ class QuestionModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'question_number': questionNumber,
       'free_text_question_model': freeTextQuestionModel != null
           ? freeTextQuestionModel!.toJson()
@@ -243,6 +248,7 @@ class QuestionModel {
   factory QuestionModel.emptyFreeTextQuestion() {
     Random random = Random();
     return QuestionModel(
+      id: random.nextInt(100000).toString(),
       questionNumber: random.nextInt(100),
       freeTextQuestionModel: FreeTextQuestionModel(
         questionText: "How are you?",
@@ -256,6 +262,7 @@ class QuestionModel {
     Random random = Random();
 
     return QuestionModel(
+      id: random.nextInt(100000).toString(),
       questionNumber: random.nextInt(100),
       trueFalseQuestionModel: TrueFalseQuestionModel(
         questionText: "Are you good?",
@@ -268,6 +275,7 @@ class QuestionModel {
   factory QuestionModel.emptySelectOneOptionQuestion() {
     Random random = Random();
     return QuestionModel(
+      id: random.nextInt(100000).toString(),
       questionNumber: random.nextInt(100),
       selectOneOptionQuestion: SelectOneOptionQuestion(
         questionText: "What is your favorite color?",
@@ -281,6 +289,7 @@ class QuestionModel {
   factory QuestionModel.emptySelectMultipleOptionsQuestion() {
     Random random = Random();
     return QuestionModel(
+      id: random.nextInt(100000).toString(),
       questionNumber: random.nextInt(100),
       selectMultipleOptionsQuestion: SelectMultipleOptionsQuestion(
         questionText: "What are your favorite colors?",
@@ -294,6 +303,7 @@ class QuestionModel {
   factory QuestionModel.emptyNumberTypeQuestion() {
     Random random = Random();
     return QuestionModel(
+      id: random.nextInt(100000).toString(),
       questionNumber: random.nextInt(100),
       numberTypeQuestion: NumberTypeQuestion(
         questionText: "How old are you?",

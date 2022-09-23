@@ -5,4 +5,6 @@ class AppConstants {
   static String admins = "Admins";
 
   static String surveys = "Surveys";
+
+  static String reports = "Reports";
 }

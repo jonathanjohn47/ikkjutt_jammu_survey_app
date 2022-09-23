@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:ikkjutt_jammu_survey_app/core/app_constants.dart';
 
 import '../../new_survey/models/survey_model.dart';
 import '../models/report_model.dart';
@@ -11,16 +15,16 @@ class AllReportsGetController extends GetxController {
   RxList<ReportModel> allReports = <ReportModel>[].obs;
 
   void fetchAllReports() {
-    for (int i = 0; i < 10; i++) {
-      allReports.add(ReportModel(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        title: 'Report $i',
-        description: 'Description $i',
-        latitude: 0.0,
-        longitude: 0.0,
-        surveyModel: surveyModel,
-      ));
-    }
+    FirebaseFirestore.instance
+        .collection(AppConstants.surveys)
+        .doc(surveyModel.id)
+        .collection(AppConstants.reports)
+        .snapshots()
+        .listen((event) {
+      allReports.value = event.docs
+          .map((e) => ReportModel.fromJson(jsonDecode(jsonEncode(e.data()))))
+          .toList();
+    });
   }
 
   @override
