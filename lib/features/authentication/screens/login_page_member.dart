@@ -30,9 +30,9 @@ class LoginPageMember extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                    height: Get.height / 4,
-                    child: Image.asset('assets/images/logo.jpeg')),
+                CircleAvatar(
+                    radius: Get.width / 4,
+                    backgroundImage: AssetImage('assets/images/logo.jpeg')),
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: '10 Digit Phone Number',
